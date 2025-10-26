@@ -1,0 +1,172 @@
+/*
+ * This CSS file focuses on the overlay (body::before)
+ * and the styling for the To-Do List components.
+ * The background-image for the body is now
+ * set via an inline style in your index.html's <body> tag.
+ */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+    /* IMPORTANT: background-image and related properties are NOT here anymore.
+       They are now in the inline style of the <body> tag in index.html. */
+    
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to the top, not center vertically */
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    padding: 50px 20px; /* Add some padding around the container */
+    margin: 0; /* Remove default body margin */
+    color: #333; /* Default text color */
+}
+
+/* Add an overlay to make content more readable over the background image */
+/* This MUST remain in CSS as it cannot be done with inline HTML styles */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Dark semi-transparent overlay (adjust opacity as needed) */
+    z-index: -1; /* Place behind other content */
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.95); /* Slightly transparent white background for the list container */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+    width: 100%;
+    max-width: 500px; /* Max width for the container */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50; /* Darker heading color */
+    margin-bottom: 30px;
+    font-size: 2.2em;
+    font-weight: 600;
+}
+
+.input-area {
+    display: flex; /* Use flexbox for input and button alignment */
+    margin-bottom: 25px;
+}
+
+#taskInput {
+    flex-grow: 1; /* Allow input to take available space */
+    padding: 12px 15px;
+    border: 1px solid #c4c4c4;
+    border-radius: 8px 0 0 8px; /* Rounded left corners */
+    font-size: 1.1em;
+    outline: none; /* Remove default focus outline */
+    transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+#taskInput:focus {
+    border-color: #007bff; /* Blue border on focus */
+}
+
+#addTaskBtn {
+    padding: 12px 20px;
+    background-color: #28a745; /* Green add button */
+    color: white;
+    border: none;
+    border-radius: 0 8px 8px 0; /* Rounded right corners */
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.2s;
+}
+
+#addTaskBtn:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+#taskList {
+    list-style: none; /* Removes default bullet points */
+    padding: 0; /* Remove default list padding */
+}
+
+#taskList li {
+    display: flex; /* Flexbox for checkbox, text, and delete button */
+    align-items: center; /* Vertically align items */
+    padding: 15px;
+    margin-bottom: 12px;
+    background: #fdfdfd; /* Light background for list items */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Soft shadow for list items */
+    transition: all 0.3s ease; /* Smooth transitions */
+}
+
+#taskList li.completed {
+    background-color: #e0ffe5; /* Lighter green for completed tasks */
+    opacity: 0.8;
+}
+
+#taskList li.completed .task-text {
+    text-decoration: line-through; /* Strikethrough for completed task text */
+    color: #6c757d; /* Greyer text for completed tasks */
+}
+
+/* Custom Checkbox Styling */
+.task-content {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Allows it to take available space */
+}
+
+.task-content input[type="checkbox"] {
+    appearance: none; /* Hide default checkbox */
+    -webkit-appearance: none; /* For Safari */
+    width: 22px;
+    height: 22px;
+    border: 2px solid #007bff; /* Blue border for custom checkbox */
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 12px;
+    position: relative;
+    transition: background-color 0.2s, border-color 0.2s;
+    flex-shrink: 0; /* Prevent checkbox from shrinking */
+}
+
+.task-content input[type="checkbox"]:checked {
+    background-color: #007bff; /* Blue background when checked */
+    border-color: #007bff;
+}
+
+.task-content input[type="checkbox"]:checked::after {
+    content: '✔'; /* Checkmark symbol */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the checkmark */
+    color: white;
+    font-size: 1.6em; /* Increased size for better visibility */
+    line-height: 1;
+}
+
+.task-text {
+    font-size: 1.1em;
+    flex-grow: 1; /* Allow text to take remaining space */
+    word-break: break-word; /* Prevent long words from overflowing */
+}
+
+.delete-btn {
+    background-color: #dc3545; /* Red delete button */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 15px; /* Space from the task text */
+    font-size: 0.95em;
+    transition: background-color 0.2s;
+    flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
